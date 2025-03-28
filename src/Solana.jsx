@@ -9,12 +9,8 @@ import {
 } from "@solana/wallet-adapter-react-ui";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import { Connection, PublicKey } from "@solana/web3.js";
-
-import React from "react";
 import { useEffect, useMemo, useState } from "react";
-
 import TokenLaunchPad from './components/sol/CreateToken';
-import MintToken from './components/sol/MintToken';
 
 function WalletBalance() {
     const { publicKey } = useWallet();
@@ -47,9 +43,9 @@ function WalletBalance() {
     );
 }
 
-function App() {
+function Solana() {
     const [token,setToken] = useState(null);
-    const [mintStatus, setMintStatus] = useState(false);
+    
     const network = WalletAdapterNetwork.Mainnet;
 
     const endpoint = useMemo(() => "https://lb.drpc.org/ogrpc?network=solana&dkey=AisX40s7gEdYtN7PBkMXTGwMmF_BCtMR8LeNjk6iId46", []);
@@ -63,15 +59,9 @@ function App() {
                         <WalletMultiButton />
                         <WalletDisconnectButton />
                         <WalletBalance /> 
-
                     <TokenLaunchPad onTokenCreate={(tokenMint) => {
                         setToken(tokenMint);
                     }} />
-                    
-                    {token && token.toBase58()}
-                    
-                    {token && <MintToken onDone={()=>{setMintStatus(true)}} mintAddress={token}/>}
-
                     </WalletModalProvider>
                 </WalletProvider>
             </ConnectionProvider>
@@ -80,4 +70,4 @@ function App() {
     );
 }
 
-export default App;
+export default Solana;
