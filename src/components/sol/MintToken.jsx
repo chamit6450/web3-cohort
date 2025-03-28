@@ -2,11 +2,10 @@ import { getAssociatedTokenAddressSync, createAssociatedTokenAccountInstruction,
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Transaction } from "@solana/web3.js";
 import React, { useState } from "react";
+
 export default function MintToken({onDone,mintAddress}){
     const {connection} = useConnection();
-    const wallet = useWallet();
-    
-    
+    const wallet = useWallet();    
 
    async function createMint(){
     const associatedToken = getAssociatedTokenAddressSync( //get ATA
